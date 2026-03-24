@@ -1,0 +1,34 @@
+2026/03/24-16:40:02.378 23e0 Reusing MANIFEST C:\Users\thierry.rodrigues\Downloads\Bot-segurança\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/03/24-16:40:02.378 23e0 Recovering log #577
+2026/03/24-16:40:02.387 23e0 Reusing old log C:\Users\thierry.rodrigues\Downloads\Bot-segurança\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000577.log 
+2026/03/24-16:40:04.183 23e0 Compacting 1@1 + 7@2 files
+2026/03/24-16:40:04.215 23e0 Generated table #582@1: 4440 keys, 2127499 bytes
+2026/03/24-16:40:04.275 23e0 Generated table #583@1: 102184 keys, 2252361 bytes
+2026/03/24-16:40:04.325 23e0 Generated table #584@1: 107196 keys, 2258612 bytes
+2026/03/24-16:40:04.392 23e0 Generated table #585@1: 96164 keys, 2246039 bytes
+2026/03/24-16:40:04.441 23e0 Generated table #586@1: 53104 keys, 2222033 bytes
+2026/03/24-16:40:04.531 23e0 Generated table #587@1: 57976 keys, 2227859 bytes
+2026/03/24-16:40:04.558 23e0 Generated table #588@1: 6427 keys, 2157044 bytes
+2026/03/24-16:40:04.561 23e0 Generated table #589@1: 14 keys, 33030 bytes
+2026/03/24-16:40:04.561 23e0 Compacted 1@1 + 7@2 files => 15524477 bytes
+2026/03/24-16:40:04.562 23e0 compacted to: files[ 0 1 15 0 0 0 0 ]
+2026/03/24-16:40:04.562 23e0 Delete type=2 #566
+2026/03/24-16:40:04.562 23e0 Delete type=2 #567
+2026/03/24-16:40:04.562 23e0 Delete type=2 #568
+2026/03/24-16:40:04.562 23e0 Delete type=2 #569
+2026/03/24-16:40:04.562 23e0 Delete type=2 #570
+2026/03/24-16:40:04.562 23e0 Delete type=2 #571
+2026/03/24-16:40:04.563 23e0 Delete type=2 #572
+2026/03/24-16:40:04.563 23e0 Delete type=2 #579
+2026/03/24-16:40:04.819 23e0 Compacting 1@1 + 4@2 files
+2026/03/24-16:40:04.850 23e0 Generated table #590@1: 1698 keys, 2138217 bytes
+2026/03/24-16:40:04.973 23e0 Generated table #591@1: 25072 keys, 2248099 bytes
+2026/03/24-16:40:05.068 23e0 Generated table #592@1: 32600 keys, 2230910 bytes
+2026/03/24-16:40:05.097 23e0 Generated table #593@1: 10550 keys, 636848 bytes
+2026/03/24-16:40:05.097 23e0 Compacted 1@1 + 4@2 files => 7254074 bytes
+2026/03/24-16:40:05.098 23e0 compacted to: files[ 0 0 15 0 0 0 0 ]
+2026/03/24-16:40:05.099 23e0 Delete type=2 #558
+2026/03/24-16:40:05.099 23e0 Delete type=2 #559
+2026/03/24-16:40:05.099 23e0 Delete type=2 #565
+2026/03/24-16:40:05.099 23e0 Delete type=2 #576
+2026/03/24-16:40:05.100 23e0 Delete type=2 #580
