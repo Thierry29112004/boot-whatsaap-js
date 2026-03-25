@@ -7,21 +7,37 @@ const qrcode = require('qrcode');
 // Configurações do Painel e Banco de Dados
 const app = express();
 const porta = process.env.PORT || 3000;
+
+// O NOSSO NOVO SEMÁFORO 🚦
+let statusBot = 'iniciando'; 
 let qrCodeAtual = ''; 
+
 const memoriaAtendimento = {};
 const MONGODB_URI = process.env.MONGODB_URI;
 
-// 🌐 ROTA DO PAINEL WEB (Exibe o QR Code ou a tela de Sucesso)
+// 🌐 ROTA DO PAINEL WEB (Agora com 3 estágios)
 app.get('/', async (req, res) => {
-    if (qrCodeAtual) {
+    if (statusBot === 'iniciando') {
+        res.send(`
+            <html lang="pt-BR">
+                <body style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; font-family:Arial, sans-serif; background-color:#f0f2f5; text-align:center;">
+                    <h2>⏳ O robô está acordando...</h2>
+                    <p>O Google Chrome invisível está sendo aberto e conectando ao Banco de Dados.</p>
+                    <p>Isso pode levar de 15 a 30 segundos. A página vai atualizar sozinha!</p>
+                    <script>setTimeout(() => location.reload(), 5000);</script>
+                </body>
+            </html>
+        `);
+    } else if (statusBot === 'qr_code' && qrCodeAtual) {
         try {
             const qrImage = await qrcode.toDataURL(qrCodeAtual);
             res.send(`
                 <html lang="pt-BR">
                     <body style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; font-family:Arial, sans-serif; background-color:#f0f2f5;">
                         <h2>Painel da Tecntel Connect 🎥🔌</h2>
-                        <p>Escaneie o QR Code abaixo:</p>
+                        <p>Escaneie o QR Code abaixo com seu WhatsApp:</p>
                         <img src="${qrImage}" alt="QR Code" style="width:300px; height:300px; border-radius:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"/>
+                        <p style="color: red; font-size: 14px; margin-top: 10px;">Seja rápido! O código expira em 40 segundos.</p>
                         <script>setTimeout(() => location.reload(), 10000);</script>
                     </body>
                 </html>
@@ -29,8 +45,15 @@ app.get('/', async (req, res) => {
         } catch (err) {
             res.send('Erro ao gerar imagem.');
         }
-    } else {
-        res.send('<h2 style="font-family:Arial; text-align:center; margin-top:20%;">✅ Bot conectado e operando! (Memória Imortal)</h2>');
+    } else if (statusBot === 'conectado') {
+        res.send(`
+            <html lang="pt-BR">
+                <body style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; font-family:Arial, sans-serif; background-color:#e6f4ea;">
+                    <h2 style="color: #137333;">✅ Bot conectado e operando!</h2>
+                    <p>O seu login está salvo no Banco de Dados. Pode fechar esta página.</p>
+                </body>
+            </html>
+        `);
     }
 });
 
@@ -43,7 +66,7 @@ mongoose.connect(MONGODB_URI).then(() => {
     const client = new Client({
         authStrategy: new RemoteAuth({
             store: store,
-            backupSyncIntervalMs: 300000 // Faz cópia de segurança a cada 5 minutos
+            backupSyncIntervalMs: 300000 
         }),
         puppeteer: {
             args: [
@@ -58,14 +81,17 @@ mongoose.connect(MONGODB_URI).then(() => {
         }
     });
 
-    // 📱 EVENTOS DO WHATSAPP
+    // 📱 EVENTOS DO WHATSAPP (Atualizando o semáforo)
     client.on('qr', qr => {
+        statusBot = 'qr_code'; // Muda o status para mostrar a tela do QR Code
         qrCodeAtual = qr;
+        console.log('⚠️ Novo QR Code gerado! Atualize a página web.');
     });
 
     client.on('ready', () => {
+        statusBot = 'conectado'; // Muda o status para a tela de Sucesso
         qrCodeAtual = ''; 
-        console.log('✅ Bot da Tecntel Connect rodando com Anti-Áudio e Notificações Inteligentes!');
+        console.log('✅ Bot da Tecntel Connect rodando com Sucesso!');
     });
 
     client.on('message', async message => {
@@ -174,7 +200,7 @@ mongoose.connect(MONGODB_URI).then(() => {
     console.error('❌ Erro ao ligar ao MongoDB: ', err);
 });
 
-// Liga o servidor Web (O Despertador)
+// Liga o servidor Web
 app.listen(porta, () => {
     console.log(`🌐 O Painel Web está rodando na porta ${porta}`);
 });
